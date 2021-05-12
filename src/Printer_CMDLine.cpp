@@ -4,7 +4,10 @@
 #include <algorithm>
 
 void Printer_CMDLine::print(std::map<int, Resident*> residentPerHouse, 
-                            std::map<Coordinate, int> housePerCoordinate)
+                            std::map<Coordinate, int> housePerCoordinate,
+                            int run,
+                            int totRuns,
+                           	std::string title)
 {
     std::vector<Coordinate> coordinates;
     for (auto const& element : housePerCoordinate)
@@ -40,10 +43,16 @@ void Printer_CMDLine::print(std::map<int, Resident*> residentPerHouse,
 
 } 
 void Printer_CMDLine::printResidents(std::map<int, Resident*> housePerResident,
-                                     std::map<int, Coordinate> coordinatePerHouse)
+                                     std::map<int, Coordinate> coordinatePerHouse,
+                                     int run,
+                                     int totRuns,
+                           			 std::string title)
 {
 }
-void Printer_CMDLine::printHouses (std::map<int, Coordinate> coordinatePerHouse)
+void Printer_CMDLine::printHouses (std::map<int, Coordinate> coordinatePerHouse,
+                                   int run,
+                                   int totRuns,
+                           		   std::string title)
 {
 
 }

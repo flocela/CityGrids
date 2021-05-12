@@ -10,7 +10,7 @@
 class CityFactory
 {
     public:
-        virtual std::unique_ptr<City> createCity (UI& ui) = 0;
+        virtual ~CityFactory() = default;
         virtual std::string toString () = 0;
 };
 

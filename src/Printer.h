@@ -8,10 +8,19 @@
 class Printer
 {   public:
         virtual void print(std::map<int, Resident*> residentPerHouse, 
-                           std::map<Coordinate, int> housePerCoordinate) = 0;
+                           std::map<Coordinate, int> housePerCoordinate,
+                           int run,
+                           int totRuns,
+                           std::string title) = 0;
         virtual void printResidents(std::map<int, Resident*> housePerResident,
-                                    std::map<int, Coordinate> coordinatePerHouse) = 0;
-        virtual void printHouses (std::map<int, Coordinate> coordinatePerHouse) = 0;
+                                    std::map<int, Coordinate> coordinatePerHouse,
+                                    int run,
+                                    int totRuns,
+                           	    std::string title) = 0;
+        virtual void printHouses (std::map<int, Coordinate> coordinatePerHouse,
+         			  int run,
+                                  int totRuns,
+                           	  std::string title) = 0;
 };
 
 #endif

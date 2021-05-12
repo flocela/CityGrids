@@ -1,9 +1,9 @@
-#ifndef PRINTER_CMDLINE_H
-#define PRINTER_CMDLINE_H
+#ifndef PRINTER_Graphic_H
+#define PRINTER_Graphic_H
 
 #include "Printer.h"
 
-class Printer_CMDLine : public Printer
+class Printer_Graphic : public Printer
 {   
     public:
         void print(std::map<int, Resident*> residentPerHouse, 
