@@ -1,3 +1,6 @@
 .github/**
 ./build
 ./build/*
+/build/*
+./vscode/*
+/tests/runme
