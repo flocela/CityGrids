@@ -1,7 +1,8 @@
 #include "CityFactory_Grid.h"
-//#include "Question_Int.h"
+#include "Question_Int.h"
+#include "City_Grid.h"
 
-/*CityFactory_Grid::CityFactory_Grid ()
+CityFactory_Grid::CityFactory_Grid ()
 {
     _question = std::make_unique<Question_Int>(0,
                                          1,
@@ -15,9 +16,9 @@
                                          "That number is either too small or too"
                                          " large. Minimum allowed width is 1,"
                                          " maximum allowed width is 100."); 
-}*/
+}
 
-/*
+
 std::unique_ptr<City> CityFactory_Grid::createCity (UI& ui)
 {
     return std::make_unique<City_Grid>(3);
@@ -32,7 +33,7 @@ std::unique_ptr<City> CityFactory_Grid::createCity (UI& ui)
         " from the user.";
     }
 }
-*/
+
 std::string CityFactory_Grid::toString ()
 {
     return "CityFactory_Grid";

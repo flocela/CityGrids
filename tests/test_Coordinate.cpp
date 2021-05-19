@@ -2,7 +2,6 @@
 #include "../src/Coordinate.h"
 #include <vector>
 #include <algorithm>
-#include <iostream>
 
 TEST_CASE("operator< 's primary axis is the y axis")
 {
@@ -36,10 +35,6 @@ TEST_CASE("vector is sorted because operator< has been overriden")
     
     std::vector<Coordinate> coordinates = {a, b, c, d};
     std::sort(coordinates.begin(), coordinates.end());
-    for (int ii=0; ii<coordinates.size(); ++ii)
-    {
-        std::cout << coordinates[ii].getX() << std::endl;
-    }
     REQUIRE(coordinates[0].getX() == 8);
     REQUIRE(coordinates[1].getX() == 10);
     REQUIRE(coordinates[2].getX() == 20);

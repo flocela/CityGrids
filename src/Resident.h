@@ -2,14 +2,12 @@
 #define RESIDENT_H
 
 #include <vector>
+#include "Color.h"
 
 class Resident{
     public:
-        enum Color { red, blue, green, absent };
-        enum ResidentType { flat, rising, falling, stepup, stepdown };
         Resident (int id,
                   Color color, 
-                  ResidentType residentType,
                   double allowedMovementDistance,
                   double happinessGoal);
         Resident (const Resident& obj) = default;
@@ -20,7 +18,6 @@ class Resident{
 
         int getID() { return _ID; }
         virtual Color getColor () const { return _color; };
-        virtual ResidentType getResidentType () const { return _resident_type; };
         virtual double getAllowedMovementDistance () const { return _allowed_movement_distance; };
         virtual double getHappinessGoal () const { return _happiness_goal; };
 
@@ -30,12 +27,10 @@ class Resident{
         virtual double getHappiness (std::vector<Color> neighbors) const = 0;
         
     private:
-        Resident::Color _color;
-        Resident::ResidentType _resident_type;
+        Color  _color;
         double _allowed_movement_distance;
         double _happiness_goal;
-        int _ID;
-        static const std::vector<int> residentTypes;
+        int    _ID;
 };
 
 #endif

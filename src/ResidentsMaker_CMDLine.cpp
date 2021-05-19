@@ -25,7 +25,7 @@ std::vector<std::unique_ptr<Resident>> ResidentsMaker_CMDLine
                                                             numOfResidentsCreated,
                                                             numResidentsLeftToMake,
                                                             .5,
-                                                            Resident::Color::green);
+                                                            Color::green);
         for (auto& r: newResidents)
         {
             residents.emplace_back(std::move(r));

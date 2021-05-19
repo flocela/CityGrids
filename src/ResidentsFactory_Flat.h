@@ -19,13 +19,13 @@ class ResidentsFactory_Flat: public ResidentsFactory
                                                 UI& ui,
                                                 int firstID,
                                                 int maxCount, 
-                                                Resident::Color color) override;
+                                                Color color) override;
         std::vector<std::unique_ptr<Resident>> createResidents(
                                                 UI& ui,
                                                 int firstID, 
                                                 int maxCount, 
                                                 double happinessGoal, 
-                                                Resident::Color color) override;
+                                                Color color) override;
         std::string toString () override;
     
     private:

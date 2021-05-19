@@ -11,7 +11,7 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_StepDown::createResident
                                                             UI& ui, 
                                                             int firstID,
                                                             int maxCount,
-                                                            Resident::Color color)
+                                                            Color color)
 {   
     Question_Double qHappinessGoal{1,
                                    0.0,
@@ -34,7 +34,7 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_StepDown::createResident
                                                             int firstID, 
                                                             int maxCount,
                                                             double happinessGoal,
-                                                            Resident::Color color)
+                                                            Color color)
 {   
     Question_Int qHowMany{0,
                           1,
@@ -106,7 +106,6 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_StepDown::createResident
         residents.push_back(
             std::make_unique<Resident_StepDown>(firstID+ii,
                                                 color,
-                                                Resident::ResidentType::stepdown,
                                                 movement,
                                                 happinessGoal,
                                                 happinessAtZero,

@@ -1,6 +1,5 @@
 #include "CityMaker_CMDLine.h"
 #include "UI_CMDLine.h"
-#include <iostream>
 
 std::unique_ptr<City> CityMaker_CMDLine::makeCity (std::vector<CityFactory*> cityFactories) const
 {

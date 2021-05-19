@@ -8,8 +8,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if happinessGoal is greater t
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0, // allowedMovementDistance
                           1.2, // happinessGoal
                           1.0, // happinessValueAtZeroDiversity
@@ -22,8 +21,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if happinessGoal is less than
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           -0.25,
                           1.0,
@@ -35,8 +33,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if happinessValue at zero is 
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           -0.3,
@@ -48,8 +45,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if happinessValue at zero is 
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           1.2,
@@ -61,8 +57,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if happinessValue at one is l
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           0.3,
@@ -74,8 +69,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if happinessValue at one is g
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           .5,
@@ -87,8 +81,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if diverstiyWhereDropHappens 
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           1.0,
@@ -100,8 +93,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if diverstiyWhereDropHappens 
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           1.0,
@@ -114,8 +106,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if"
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           .25,
@@ -129,8 +120,7 @@ TEST_CASE("Resident_StepDown Ctor throws exception if"
 {   
     REQUIRE_THROWS_WITH(
         Resident_StepDown(1, 
-                          Resident::Color::green, 
-                          Resident::ResidentType::stepdown,
+                          Color::green, 
                           5.0,
                           0.25,
                           .75,
@@ -144,18 +134,17 @@ TEST_CASE("getHappines() returns lowered happinessValue at point where drop happ
 {
     // Note diversity Ratio is 0.5. @diverstiyWhereDropHappens is 0.5.
     Resident_StepDown resident{ 1, 
-                                Resident::Color::green, 
-                                Resident::ResidentType::stepdown,
+                                Color::green, 
                                 5.0,  // allowedMovementDistance
                                 0.25, // happinessGoal
                                 0.75, // happinessValueAtZeroDiversity
                                 0.25, // happinessValueAtOneDiversity
                                 0.5   // diversityWhereDropHappens
                                 };
-    std::vector<Resident::Color> neighbors = { Resident::Color::blue,
-                                               Resident::Color::blue,
-                                               Resident::Color::green,
-                                               Resident::Color::green};
+    std::vector<Color> neighbors = { Color::blue,
+                                               Color::blue,
+                                               Color::green,
+                                               Color::green};
     REQUIRE(resident.getHappiness(neighbors) == 0.25);
 }
 
@@ -163,18 +152,17 @@ TEST_CASE("getHappines() returns higher happinessValue before diversity drop.")
 {
     // Note diversity Ratio is 0.25. @diverstiyWhereDropHappens is 0.5.
     Resident_StepDown resident{ 1, 
-                                Resident::Color::green, 
-                                Resident::ResidentType::stepdown,
+                                Color::green, 
                                 5.0,  // allowedMovementDistance
                                 0.25, // happinessGoal
                                 0.75, // happinessValueAtZeroDiversity
                                 0.25, // happinessValueAtOneDiversity
                                 0.5   // diversityWhereDropHappens
                                 };
-    std::vector<Resident::Color> neighbors = { Resident::Color::blue,
-                                               Resident::Color::green,
-                                               Resident::Color::green,
-                                               Resident::Color::green};
+    std::vector<Color> neighbors = { Color::blue,
+                                               Color::green,
+                                               Color::green,
+                                               Color::green};
     REQUIRE(resident.getHappiness(neighbors) == 0.75);
 }
 
@@ -182,17 +170,16 @@ TEST_CASE("getHappines() returns lower happinessValue afterDiversity drop.")
 {
     // Note diversity Ratio is 0.25. @diverstiyWhereDropHappens is 0.5.
     Resident_StepDown resident{ 1, 
-                                Resident::Color::green, 
-                                Resident::ResidentType::stepdown,
+                                Color::green, 
                                 5.0,  // allowedMovementDistance
                                 0.25, // happinessGoal
                                 0.75, // happinessValueAtZeroDiversity
                                 0.25, // happinessValueAtOneDiversity
                                 0.5   // diversityWhereDropHappens
                                 };
-    std::vector<Resident::Color> neighbors = { Resident::Color::blue,
-                                               Resident::Color::blue,
-                                               Resident::Color::blue,
-                                               Resident::Color::green};
+    std::vector<Color> neighbors = { Color::blue,
+                                               Color::blue,
+                                               Color::blue,
+                                               Color::green};
     REQUIRE(resident.getHappiness(neighbors) == 0.25);
 }

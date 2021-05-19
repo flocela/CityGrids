@@ -1,5 +1,4 @@
 #include "renderer.h"
-#include <iostream>
 #include <string>
 
 Renderer::Renderer(const std::size_t screen_width,
@@ -8,7 +7,8 @@ Renderer::Renderer(const std::size_t screen_width,
     : screen_width(screen_width),
       screen_height(screen_height),
       grid_width(grid_width),
-      grid_height(grid_height) {
+      grid_height(grid_height) 
+{
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize.\n";
@@ -33,15 +33,99 @@ Renderer::Renderer(const std::size_t screen_width,
   }
 }
 
+void Renderer::poll()
+{
+    SDL_Event e;
+    int counter = 0;
+    while (SDL_WaitEvent(&e) != 0)
+    {   
+        counter ++;
+        if (e.type == SDL_QUIT)
+        {
+            //_keep_polling = false;
+            break;
+        }
+    }
+}
+
 Renderer::~Renderer() {
   SDL_DestroyWindow(sdl_window);
   SDL_Quit();
 }
 
-void Renderer::RenderCity(std::map<Coordinate, int>, std::vector<std::array<int, 3>> colors)
+void Renderer::RenderCity(std::map<Coordinate, int> colorPerCoordinate)
 {
+    std::vector<Coordinate> black = {};
+    std::vector<Coordinate> red   = {};
+    std::vector<Coordinate> green = {};
+    std::vector<Coordinate> blue  = {};
 
+    for (const auto& z: colorPerCoordinate)
+    {
+      if (z.second == 0)
+        black.push_back(z.first);
+      if (z.second == 1)
+        red.push_back(z.first);
+      if (z.second == 2)
+        green.push_back(z.first);
+      if (z.second == 3)
+        blue.push_back(z.first);
+    }
+
+    SDL_Rect block;
+    block.w = 50;
+    block.h = 50;
+
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
+    SDL_RenderClear(sdl_renderer);
+
+    SDL_SetRenderDrawColor(sdl_renderer, 0, 0, 0, 255);
+    for (Coordinate c :black)
+    {
+        block.x = c.getX() * block.w;
+        block.y = c.getY() * block.h;
+        SDL_RenderFillRect(sdl_renderer, &block);
+    }
+
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
+    for (Coordinate c :red)
+    {
+        block.x = c.getX() * block.w;
+        block.y = c.getY() * block.h;
+        SDL_RenderFillRect(sdl_renderer, &block);
+    }
+
+    SDL_SetRenderDrawColor(sdl_renderer, 0, 255, 0, 255);
+    for (Coordinate c :green)
+    {
+        block.x = c.getX() * block.w;
+        block.y = c.getY() * block.h;
+        SDL_RenderFillRect(sdl_renderer, &block);
+    }
+
+    SDL_SetRenderDrawColor(sdl_renderer, 0, 0, 255, 255);
+    for (Coordinate c :blue)
+    {
+        block.x = c.getX() * block.w;
+        block.y = c.getY() * block.h;
+        SDL_RenderFillRect(sdl_renderer, &block);
+    }
+
+    SDL_RenderPresent(sdl_renderer);
 }
+
+void Renderer::Render()
+{
+    SDL_Rect block;
+    block.w = 50;
+    block.h = 50;
+
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
+    SDL_RenderClear(sdl_renderer);
+
+    SDL_RenderPresent(sdl_renderer);
+}
+
 
 void Renderer::Render(Snake const snake, SDL_Point const &food) {
   SDL_Rect block;

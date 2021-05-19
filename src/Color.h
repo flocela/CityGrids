@@ -1,0 +1,1 @@
+enum class Color { red, blue, green, absent };

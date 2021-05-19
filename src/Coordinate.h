@@ -13,8 +13,8 @@ class Coordinate
         Coordinate& operator=(const Coordinate& obj) = default;
         Coordinate& operator=(Coordinate&& obj) noexcept = default;
 
-        int getX();
-        int getY();
+        int getX() const;
+        int getY() const;
         bool operator<(const Coordinate& a) const;
         
         friend std::ostream& operator<<(std::ostream& os, Coordinate const& c);

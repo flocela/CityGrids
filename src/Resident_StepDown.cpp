@@ -2,14 +2,13 @@
 #include <iostream>
 
 Resident_StepDown::Resident_StepDown ( int id,
-                                       Color color, 
-                                       ResidentType residentType,
+                                       Color color,
                                        double allowedMovementDistance,
                                        double happinessGoal,
                                        double happinessValueAtZeroDiversity,
                                        double happinessValueAtOneDiversity,
                                        double diversityWhereDropHappens):
-    Resident(id, color, residentType, allowedMovementDistance, happinessGoal),
+    Resident(id, color, allowedMovementDistance, happinessGoal),
     _happiness_func{happinessValueAtZeroDiversity, 
                     happinessValueAtOneDiversity, 
                     diversityWhereDropHappens}
@@ -17,13 +16,13 @@ Resident_StepDown::Resident_StepDown ( int id,
     
 }
 
-double Resident_StepDown::getHappiness(std::vector<Resident::Color> neighbors) const
+double Resident_StepDown::getHappiness(std::vector<Color> neighbors) const
 {
     int total = neighbors.size();
     int like  = 0;
     int diff  = 0;
 
-    for (Resident::Color color : neighbors)
+    for (Color color : neighbors)
     {
         if (color == getColor())
         {

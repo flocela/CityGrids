@@ -3,12 +3,12 @@
 Coordinate::Coordinate (int x, int y): _x{x}, _y{y}
 {}
 
-int Coordinate::getX ()
+int Coordinate::getX () const
 {
     return _x;
 }
 
-int Coordinate::getY ()
+int Coordinate::getY () const
 {
     return _y;
 }

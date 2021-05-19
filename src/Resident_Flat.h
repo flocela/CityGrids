@@ -9,8 +9,7 @@ class Resident_Flat: public Resident
     public:
         Resident_Flat () = delete;
         Resident_Flat (int id,
-                      Color color, 
-                      ResidentType residentType,
+                      Color color,
                       double allowedMovementDistance,
                       double happinessGoal,
                       double happinessValue);

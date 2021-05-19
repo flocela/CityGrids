@@ -11,7 +11,7 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
                                                             UI& ui, 
                                                             int firstID,
                                                             int maxCount,
-                                                            Resident::Color color)
+                                                            Color color)
 {   
     Question_Double qHappinessGoal{1,
                                    0.0,
@@ -34,7 +34,7 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
                                                             int firstID, 
                                                             int maxCount, 
                                                             double happinessGoal, 
-                                                            Resident::Color color)
+                                                            Color color)
 {   
     Question_Int qHowMany{0,
                           1,
@@ -80,7 +80,6 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
         residents.push_back(
             std::make_unique<Resident_Flat>(firstID+ii,
                                             color,
-                                            Resident::ResidentType::flat,
                                             movement,
                                             happinessGoal,
                                             happinessValue));

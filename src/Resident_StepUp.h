@@ -9,8 +9,7 @@ class Resident_StepUp: public Resident
     public:
         Resident_StepUp () = delete;
         Resident_StepUp (int id,
-                        Color color, 
-                        ResidentType residentType,
+                        Color color,
                         double allowedMovementDistance,
                         double happinessGoal,
                         double happinessValueAtZeroDiversity,
