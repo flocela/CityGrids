@@ -19,12 +19,12 @@ class ResidentsFactory
         virtual std::vector<std::unique_ptr<Resident>> createResidents(
                                                         UI& ui, 
                                                         int firstID,
-                                                        int maxCount, 
+                                                        int count, 
                                                         Color color) = 0;
         virtual std::vector<std::unique_ptr<Resident>> createResidents(
                                                         UI& ui,
                                                         int firstID, 
-                                                        int maxCount, 
+                                                        int count, 
                                                         double happinessGoal, 
                                                         Color color) = 0;
         virtual std::string toString () = 0;

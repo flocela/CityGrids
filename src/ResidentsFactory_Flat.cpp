@@ -10,7 +10,7 @@ std::string ResidentsFactory_Flat::toString ()
 std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
                                                             UI& ui, 
                                                             int firstID,
-                                                            int maxCount,
+                                                            int count,
                                                             Color color)
 {   
     Question_Double qHappinessGoal{1,
@@ -22,27 +22,18 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
 
     double happinessGoal = askUserForDouble(ui,
                                             qHappinessGoal,
-                                            "Can not get information needed to"
-                                            " determine the happiness goal for"
-                                            " these residents from the user.");
+                                            _happinessGoalFailure);
     
-    return createResidents(ui, firstID, maxCount, happinessGoal, color);
+    return createResidents(ui, firstID, count, happinessGoal, color);
 }
 
 std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
                                                             UI& ui,
                                                             int firstID, 
-                                                            int maxCount, 
+                                                            int count, 
                                                             double happinessGoal, 
                                                             Color color)
 {   
-    Question_Int qHowMany{0,
-                          1,
-                          maxCount,
-                          _howManyOrigPrompt + std::to_string(maxCount) + ".",
-                          _howManyTypePrompt,
-                          _howManyRangePrompt + std::to_string(maxCount) + "."};
-
     Question_Double qMovement{2,
                               0.0,
                               std::numeric_limits<double>::max(),
@@ -56,26 +47,17 @@ std::vector<std::unique_ptr<Resident>> ResidentsFactory_Flat::createResidents (
                                      _happinessValueOrigPrompt,
                                      _happinessValueTypePrompt,
                                      _happinessValueRangePrompt};
-
-    int howMany = askUserForInt(ui,
-                                qHowMany, 
-                                "Can not get information needed to determine"
-                                " number of residents from the user.");
     
     double movement = askUserForDouble(ui,
                                        qMovement,
-                                       "Can not get information needed to"
-                                       " determine the allowed movement for these"
-                                       " residents from the user.");
+                                       _movementRangeFailure);
 
     double happinessValue = askUserForDouble(ui,
                                              qHappinessValue,
-                                             "Can not get information needed to"
-                                             " determine the happiness value for"
-                                             " these residents from the user.");
+                                             _happinessValueFailure);
 
     std::vector<std::unique_ptr<Resident>> residents = {};
-    for ( int ii=0; ii<howMany; ++ii)
+    for ( int ii=0; ii<count; ++ii)
     {
         residents.push_back(
             std::make_unique<Resident_Flat>(firstID+ii,

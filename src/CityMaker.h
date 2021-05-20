@@ -9,7 +9,7 @@
 class CityMaker
 {
     public:
-        virtual std::unique_ptr<City> makeCity (std::vector<CityFactory*> cityFactories) const = 0;
+        virtual std::unique_ptr<City> makeCity (std::vector<CityFactory*> cityFactories) = 0;
         
 };
 

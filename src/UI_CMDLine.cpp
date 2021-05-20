@@ -26,17 +26,17 @@ int UI_CMDLine::menu (std::string prompt, std::vector<std::string> items)
     ssPrompt << prompt << std::endl;
     for (int ii=0; ii<size; ++ii)
     {
-        ssPrompt << ii+1 << ")" << items[ii];
+        ssPrompt << ii+1 << ")" << items[ii] << " ";
     }
     ssPrompt << std::endl;
 
     std::stringstream ssWrongType;
-    ssWrongType << "Please enter a whole number like 2." << std::endl;
+    ssWrongType << "Please enter a whole number like 2.  ";
     ssWrongType << ssPrompt.str();
 
     std::stringstream ssInRange;
     ssInRange << "Please enter a number between 1 and ";
-    ssInRange << items.size() << std::endl;
+    ssInRange << items.size() << "  ";
     ssInRange << ssPrompt.str();
 
     Question_Int chooseMenuItem{1,

@@ -17,57 +17,41 @@
 
 #include <thread>
 
-/*
-class A
-{
-    public:
-        void doWork()
-        {}
-};
-*/
+std::vector<std::unique_ptr<CityFactory>> initCityFactories ();
+
+std::vector<std::unique_ptr<ResidentsFactory>> initResidentFactories();
+
+std::vector<CityFactory*> getCityFactoryPointers (
+    std::vector<std::unique_ptr<CityFactory>>& cityFactories);
+
+std::vector<ResidentsFactory*> getResidentFactoryPointers (
+    std::vector<std::unique_ptr<ResidentsFactory>>& residentFactories);
 
 int main() {
 
-
-    constexpr std::size_t kFramesPerSecond{60};
-  	constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
-  	constexpr std::size_t kScreenWidth{640};
-  	constexpr std::size_t kScreenHeight{640};
-  	constexpr std::size_t kGridWidth{32};
-  	constexpr std::size_t kGridHeight{32};
-/*
-    CityFactory_Grid cfg = CityFactory_Grid(); 
     std::vector<std::unique_ptr<CityFactory>> cityFactories;
-    
+    std::vector<std::unique_ptr<ResidentsFactory>> residentFactories;
+    std::vector<CityFactory*> cityFactoryPointers;
+    std::vector<ResidentsFactory*> residentFactoryPointers;
 
-    cityFactories.emplace_back(std::make_unique<CityFactory_Grid>());
-    std::vector<CityFactory*> cityFactoryPointers = {};
-    for (auto& factory: cityFactories)
-    {
-        cityFactoryPointers.push_back(factory.get());
-    }
+    cityFactories           = initCityFactories();
+    residentFactories       = initResidentFactories();
+    cityFactoryPointers     = getCityFactoryPointers(cityFactories);
+    residentFactoryPointers = getResidentFactoryPointers(residentFactories);    
 
     CityMaker_CMDLine cityMaker{};
     std::unique_ptr<City> city = cityMaker.makeCity(cityFactoryPointers);
-    std::cout << "main: "<< city->getSize() << std::endl;
 
-    std::vector<std::unique_ptr<ResidentsFactory>> residentFactories;
-    residentFactories.emplace_back(std::make_unique<ResidentsFactory_Flat>());
-    std::vector<ResidentsFactory*> residentFactoryPointers = {};
-    for (auto& factory : residentFactories)
-    {
-        residentFactoryPointers.push_back(factory.get());
-    }
-    
     ResidentsMaker_CMDLine residentsMaker{};
 
-    // These residents are not associated with any home at this point. They will be associated
-    // via two hashmaps later. A hashmap of resident per home and hashmap of home per resident.
+    // These residents are not associated with any home at this point. They will be
+    // be associated later via a hashmap of resident per home and hashmap of home 
+    // per resident.
     std::vector<std::unique_ptr<Resident>>residents = 
         residentsMaker.makeResidents(residentFactoryPointers, city->getSize());
     std::cout << "number of residents: " << residents.size();
-*/
-/*
+    /*
+
     std::vector<std::array<int, 3>> colors = { {255, 0, 0},
                                                {0, 255, 0},
                                                {0, 0, 255},
@@ -183,4 +167,49 @@ int main() {
   	std::cout << "Score: " << game.GetScore() << "\n";
   	std::cout << "Size: " << game.GetSize() << "\n";*/
   	return 0;
+}
+
+/*
+constexpr std::size_t kFramesPerSecond{60};
+  	constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
+  	constexpr std::size_t kScreenWidth{640};
+  	constexpr std::size_t kScreenHeight{640};
+  	constexpr std::size_t kGridWidth{32};
+  	constexpr std::size_t kGridHeight{32};*/
+
+std::vector<std::unique_ptr<CityFactory>> initCityFactories ()
+{
+    std::vector<std::unique_ptr<CityFactory>> cityFactories = {};
+    cityFactories.emplace_back(std::make_unique<CityFactory_Grid>());
+    return cityFactories;
+}
+
+std::vector<std::unique_ptr<ResidentsFactory>> initResidentFactories()
+{
+    std::vector<std::unique_ptr<ResidentsFactory>> residentFactories = {};
+    residentFactories.emplace_back(std::make_unique<ResidentsFactory_Flat>());
+    return residentFactories;
+}
+
+std::vector<CityFactory*> getCityFactoryPointers (
+    std::vector<std::unique_ptr<CityFactory>>& cityFactories)
+{
+    std::vector<CityFactory*> cityFactoryPointers = {};
+    for (auto& factory: cityFactories)
+    {
+        cityFactoryPointers.push_back(factory.get());
+    }
+     std::cout << "line 206 " << cityFactoryPointers[0]->toString() << std::endl;
+    return cityFactoryPointers;
+}
+
+std::vector<ResidentsFactory*> getResidentFactoryPointers (
+    std::vector<std::unique_ptr<ResidentsFactory>>& residentFactories)
+{
+    std::vector<ResidentsFactory*> residentFactoryPointers = {};
+    for (auto& factory : residentFactories)
+    {
+        residentFactoryPointers.push_back(factory.get());
+    }
+    return residentFactoryPointers;
 }
