@@ -48,25 +48,19 @@ void Printer_Graphic::print (
         Coordinate coord = x.first;
         int address = x.second;
         Color colorKey;
-        std::cout << "count: " << count << std::endl;
-        std::cout << "address" << address << std::endl;
         if (!mapContains(residentsPerAddress, address))
-        {   std::cout << "Printer_Graphic line 53 " << std::endl;
+        {   
             // No resident has this address. So this house is empty.
             colorKey = Color::absent;
         }
         else
-        {   std::cout << "Printer_Graphic line 58 address: " << address << std::endl;
+        {   
             Resident* res = residentsPerAddress[address];
-            std::cout<< res->getID() << std::endl;
-            std::cout << "Printer_Graphic line 61" << std::endl;
             colorKey = res->getColor();
-            std::cout << "Printer_Graphic line 63 " << std::endl;
         }
 
         if (!mapContains(coordinatesPerColor, colorKey))
         {
-            std::cout << "Printer_Graphic line 68 " << std::endl;
             std::vector<Coordinate> newCoordinateVector = {};
             coordinatesPerColor[colorKey] = newCoordinateVector;
         }
@@ -74,17 +68,15 @@ void Printer_Graphic::print (
         count ++;
     }
     
-    _renderer.RenderCity(coordinatesPerColor);
+    _renderer.RenderCity(coordinatesPerColor, Coordinate{50, 50});
 } 
 
 void Printer_Graphic::keepScreen()
 {
-    std::cout << "Printer_Graphic line 72" << std::endl;
     SDL_Event e;
     int counter = 0;
     while (SDL_WaitEvent(&e) != 0)
     {   
-        std::cout << "in SDL_WaitEvent while loop" << counter << std::endl;
         counter ++;
         if (e.type == SDL_QUIT)
         {

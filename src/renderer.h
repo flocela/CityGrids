@@ -20,7 +20,8 @@ class Renderer {
 
 		// Uses rgba values from _the_colors global variable
   		void RenderCity (
-			std::map<Color, std::vector<Coordinate>> coordinatesPerColor
+			std::map<Color, std::vector<Coordinate>> coordinatesPerColor,
+			Coordinate placement
 		);
   		void Render(Snake const snake, SDL_Point const &food);
   		void Render();

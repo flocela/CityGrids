@@ -64,7 +64,8 @@ std::map<Color, ColorInfo> getColorInfo ()
 }
 
 void Renderer::RenderCity (
-  std::map<Color, std::vector<Coordinate>> coordinatesPerColor
+  std::map<Color, std::vector<Coordinate>> coordinatesPerColor,
+  Coordinate placement
 )
 {
     std::map<Color, ColorInfo> colorMap = getColorInfo();
@@ -87,8 +88,8 @@ void Renderer::RenderCity (
         SDL_SetRenderDrawColor(sdl_renderer, rgba[0], rgba[1], rgba[2], rgba[3]);
         for (Coordinate c : coordinates)
         {
-            block.x = c.getX() * grid_width + 4;
-            block.y = c.getY() * grid_height + 4;
+            block.x = placement.getX() + c.getX() * grid_width + 4;
+            block.y = placement.getY() + c.getY() * grid_height + 4;
             SDL_RenderFillRect(sdl_renderer, &block);
         }
     }
