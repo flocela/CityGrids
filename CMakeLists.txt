@@ -19,7 +19,6 @@ src/City_Grid.cpp
 src/CityFactory_Grid.cpp
 src/CityMaker_CMDLine.cpp 
 src/controller.cpp 
-src/Converter.cpp
 src/Coordinate.cpp
 src/game.cpp
 src/HappinessFunc_Falling.cpp

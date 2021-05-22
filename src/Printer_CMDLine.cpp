@@ -49,10 +49,3 @@ void Printer_CMDLine::printResidents(std::map<int, Resident*> housePerResident,
                            			 std::string title)
 {
 }
-void Printer_CMDLine::printHouses (std::map<int, Coordinate> coordinatePerHouse,
-                                   int run,
-                                   int totRuns,
-                           		   std::string title)
-{
-
-}

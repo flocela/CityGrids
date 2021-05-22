@@ -16,10 +16,6 @@ class Printer_CMDLine : public Printer
                             int run,
                             int totRuns,
                             std::string title) override;
-        void printHouses (std::map<int, Coordinate> coordinatePerHouse,
-         				  int run,
-                          int totRuns,
-                          std::string title) override;
         
 };
 

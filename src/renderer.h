@@ -7,27 +7,34 @@
 #include "Coordinate.h"
 #include <map>
 #include <utility>
+#include "Color.h"
 
 class Renderer {
- public:
-  Renderer(const std::size_t screen_width, const std::size_t screen_height,
-           const std::size_t grid_width, const std::size_t grid_height);
-  ~Renderer();
+ 	public:
+  		Renderer(
+			const std::size_t screen_width, 
+			const std::size_t screen_height,
+           	const std::size_t grid_width, 
+			const std::size_t grid_height);
+  		~Renderer();
 
-  void RenderCity(std::map<Coordinate, int> colorPerCoordinate);
-  void Render(Snake const snake, SDL_Point const &food);
-  void Render();
-  void UpdateWindowTitle(int score, int fps);
-  void poll();
+		// Uses rgba values from _the_colors global variable
+  		void RenderCity (
+			std::map<Color, std::vector<Coordinate>> coordinatesPerColor
+		);
+  		void Render(Snake const snake, SDL_Point const &food);
+  		void Render();
+  		void UpdateWindowTitle(int score, int fps);
+  		void poll();
 
- private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+ 	private:
+  		SDL_Window *sdl_window;
+  		SDL_Renderer *sdl_renderer;
 
-  const std::size_t screen_width;
-  const std::size_t screen_height;
-  const std::size_t grid_width;
-  const std::size_t grid_height;
+  		const std::size_t screen_width;
+  		const std::size_t screen_height;
+  		const std::size_t grid_width;
+  		const std::size_t grid_height;
 };
 
 #endif

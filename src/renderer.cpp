@@ -53,62 +53,44 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::RenderCity(std::map<Coordinate, int> colorPerCoordinate)
+std::map<Color, ColorInfo> getColorInfo ()
 {
-    std::vector<Coordinate> black = {};
-    std::vector<Coordinate> red   = {};
-    std::vector<Coordinate> green = {};
-    std::vector<Coordinate> blue  = {};
-
-    for (const auto& z: colorPerCoordinate)
+    std::map<Color, ColorInfo> colorMap = {};
+    for (ColorInfo colorInfo : _the_colors)
     {
-      if (z.second == 0)
-        black.push_back(z.first);
-      if (z.second == 1)
-        red.push_back(z.first);
-      if (z.second == 2)
-        green.push_back(z.first);
-      if (z.second == 3)
-        blue.push_back(z.first);
+        colorMap[colorInfo._my_color] = colorInfo;
     }
+    return colorMap;
+}
 
+void Renderer::RenderCity (
+  std::map<Color, std::vector<Coordinate>> coordinatesPerColor
+)
+{
+    std::map<Color, ColorInfo> colorMap = getColorInfo();
+    int grid_width = 20;
+    int grid_height = 20;
     SDL_Rect block;
-    block.w = 50;
-    block.h = 50;
-
+    block.w = 12;
+    block.h = 12;
     SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
     SDL_RenderClear(sdl_renderer);
 
-    SDL_SetRenderDrawColor(sdl_renderer, 0, 0, 0, 255);
-    for (Coordinate c :black)
+    for (auto const& x : coordinatesPerColor)
     {
-        block.x = c.getX() * block.w;
-        block.y = c.getY() * block.h;
-        SDL_RenderFillRect(sdl_renderer, &block);
-    }
+        Color currColor = x.first;
+        std::vector<Coordinate> coordinates = x.second;
 
-    SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
-    for (Coordinate c :red)
-    {
-        block.x = c.getX() * block.w;
-        block.y = c.getY() * block.h;
-        SDL_RenderFillRect(sdl_renderer, &block);
-    }
+        ColorInfo colorInfo = colorMap[currColor];
+        std::vector<int> rgba = colorInfo.rgba;
 
-    SDL_SetRenderDrawColor(sdl_renderer, 0, 255, 0, 255);
-    for (Coordinate c :green)
-    {
-        block.x = c.getX() * block.w;
-        block.y = c.getY() * block.h;
-        SDL_RenderFillRect(sdl_renderer, &block);
-    }
-
-    SDL_SetRenderDrawColor(sdl_renderer, 0, 0, 255, 255);
-    for (Coordinate c :blue)
-    {
-        block.x = c.getX() * block.w;
-        block.y = c.getY() * block.h;
-        SDL_RenderFillRect(sdl_renderer, &block);
+        SDL_SetRenderDrawColor(sdl_renderer, rgba[0], rgba[1], rgba[2], rgba[3]);
+        for (Coordinate c : coordinates)
+        {
+            block.x = c.getX() * grid_width + 4;
+            block.y = c.getY() * grid_height + 4;
+            SDL_RenderFillRect(sdl_renderer, &block);
+        }
     }
 
     SDL_RenderPresent(sdl_renderer);

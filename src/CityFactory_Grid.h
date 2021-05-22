@@ -17,6 +17,7 @@ class CityFactory_Grid: public CityFactory
         std::unique_ptr<City>  createCity (UI& ui) override;
         std::string toString () override;
     private:
+        int askForGridWidth(UI& ui);
         Question_Int createQuestionGridWidth ();
 
         // Width of grid prompts for question

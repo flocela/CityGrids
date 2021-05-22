@@ -17,10 +17,6 @@ class Printer
                                     int run,
                                     int totRuns,
                            	    std::string title) = 0;
-        virtual void printHouses (std::map<int, Coordinate> coordinatePerHouse,
-         			  int run,
-                                  int totRuns,
-                           	  std::string title) = 0;
 };
 
 #endif
