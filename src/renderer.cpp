@@ -68,7 +68,7 @@ void Renderer::RenderCity (
   Coordinate placement
 )
 {
-    /*std::map<Color, ColorInfo> colorMap = getColorInfo();
+    std::map<Color, ColorInfo> colorMap = getColorInfo();
     int grid_width = 20;
     int grid_height = 20;
     SDL_Rect block;
@@ -94,12 +94,8 @@ void Renderer::RenderCity (
         }
     }
 
-    SDL_RenderPresent(sdl_renderer);*/
-    SDL_RenderClear(sdl_renderer);
-    SDL_Surface* image = SDL_LoadBMP("redgroup.bmp");
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(sdl_renderer, image);
-    SDL_RenderCopy(sdl_renderer, texture, NULL, NULL);
     SDL_RenderPresent(sdl_renderer);
+    //SDL_Delay(1000);
 }
 
 void Renderer::Render()

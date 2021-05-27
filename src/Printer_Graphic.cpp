@@ -27,10 +27,15 @@ Printer_Graphic::Printer_Graphic (
 }
 
 void Printer_Graphic::printScreen ()
-{
-    _renderer.Render();
+{/*
+    SDL_RenderClear(sdl_renderer);
+    SDL_Surface* image = SDL_LoadBMP("test.bmp");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(sdl_renderer, image);
+    SDL_RenderCopy(sdl_renderer, texture, NULL, NULL);
+    SDL_RenderPresent(sdl_renderer);*/
+    //_renderer.Render();
     //std::thread t1(&Renderer::poll, _renderer);
-    _keep_polling = true;
+    //_keep_polling = true;
 }
 
 void Printer_Graphic::print (
@@ -73,17 +78,24 @@ void Printer_Graphic::print (
 
 void Printer_Graphic::keepScreen()
 {
-    SDL_Event e;
+    SDL_Event event;
+    bool running = true;
     int counter = 0;
-    while (SDL_WaitEvent(&e) != 0)
+
+    while (running)
     {   
-        counter ++;
-        if (e.type == SDL_QUIT)
+        counter++;
+        if (SDL_WaitEvent(&event))
         {
-            //_keep_polling = false;
-            break;
+            switch(event.type)
+            {
+                case SDL_QUIT:
+                    std::cout << " SDL_QUIT" << std::endl;
+                    running = false;
+            }
         }
     }
+    std::cout << "End of keepScreen()" <<std::endl;
 }
 void Printer_Graphic::printResidents(std::map<int, Resident*> addressPerResident,
                                      std::map<int, Coordinate> coordinatePerAddress,

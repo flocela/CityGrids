@@ -47,7 +47,6 @@ int main() {
     ResidentsMaker_CMDLine residentsMaker{};
     std::vector<std::unique_ptr<Resident>> residents = 
         residentsMaker.makeResidents(residentFactoryPointers, city->getSize());
-    std::cout << "number of residents: " << residents.size();
 
     std::map<Color, int> intPerColor = {};
     std::map<int, Resident*> residentPerAddress = {};
@@ -56,21 +55,62 @@ int main() {
     {
         residentPerAddress[resident->getID()] = resident.get();
     }
-
-    Printer_Graphic printer{640, 960, 20, 20};
-    printer.printScreen();
-
-    printer.print(residentPerAddress, housePerCoordinate, 1, 1, "Title");
-    printer.keepScreen();
 /*
     for (const auto& z : residentPerAddress)
     {
         delete z.second;
     }*/
 
-    //Renderer renderer{640, 960, 20, 20};
+    Renderer renderer{640, 960, 20, 20};
+    Printer_Graphic printer{640, 960, 20, 20};
+
+    printer.print(residentPerAddress, housePerCoordinate, 1, 1, "Title");
+    //std::cout << "main line 68" << std::endl;
+    printer.keepScreen();
+    return 0;
     //renderer.RenderCity(colorPerCoordinateAnswer, colors);
     //SDL_Delay(5000);
+
+/*
+    bool quit = false;
+    SDL_Event event;
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Window* window = SDL_CreateWindow("SDL2 Display Image",
+    SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
+    
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Surface* image = SDL_LoadBMP("../src/test.bmp");
+    if (image == NULL)
+    {
+        std::cout << "unable to load image: " << SDL_GetError() << std::endl;
+    }
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
+
+    while (!quit)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                quit = true;
+                break;
+        }
+    }
+    SDL_Quit();
+    return 0;
+    
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(image);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+*/
+    
+    
+
+    
 
   /*
 
@@ -81,7 +121,7 @@ int main() {
   	std::cout << "Game has terminated successfully!\n";
   	std::cout << "Score: " << game.GetScore() << "\n";
   	std::cout << "Size: " << game.GetSize() << "\n";*/
-  	return 0;
+  	//return 0;
 }
 
 /*
