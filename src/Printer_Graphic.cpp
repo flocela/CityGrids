@@ -35,7 +35,8 @@ void Printer_Graphic::printScreen ()
     SDL_RenderPresent(sdl_renderer);*/
     //_renderer.Render();
     //std::thread t1(&Renderer::poll, _renderer);
-    //_keep_polling = true;
+    _renderer.Render();
+    _keep_polling = true;
 }
 
 void Printer_Graphic::print (

@@ -63,7 +63,7 @@ int main() {
 
     Renderer renderer{640, 960, 20, 20};
     Printer_Graphic printer{640, 960, 20, 20};
-
+    printer.printScreen();
     printer.print(residentPerAddress, housePerCoordinate, 1, 1, "Title");
     //std::cout << "main line 68" << std::endl;
     printer.keepScreen();
